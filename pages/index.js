@@ -188,7 +188,8 @@ export default function Portfolio() {
                                     <span className="tag">Supabase</span>
                                 </div>
                                 <div className="project-actions">
-                                    <a className="btn small secondary" href="#">Live Demo</a>
+                                    {/*<a className="btn small secondary" href="#">Live Demo</a>
+                                    */}
                                     <a className="btn small ghost" target="_blank" href="https://github.com/glytch21/codecrawlers.github.io">Code</a>
                                 </div>
                             </div>
