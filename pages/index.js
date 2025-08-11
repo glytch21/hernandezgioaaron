@@ -5,6 +5,9 @@ export default function Portfolio() {
     const [theme, setTheme] = useState('light')
     const [mounted, setMounted] = useState(false)
 
+    const calubcubImage = '/images/calubcub.png'
+    const codecrawlersImage = '/images/codecrawlers.png'
+
     useEffect(() => {
         const stored = typeof window !== 'undefined' ? window.localStorage.getItem('theme') : null
         const initial = stored === 'dark' || stored === 'light' ? stored : 'light'
@@ -87,7 +90,7 @@ export default function Portfolio() {
                 <div className="container">
                     <h2 className="section-title">About Me</h2>
                     <p className="lead">
-                        Full‑stack web developer and AI trainer focused on JavaScript and TypeScript. I build responsive, accessible apps
+                        Backend web developer and AI trainer focused on JavaScript and TypeScript. I build responsive, accessible apps
                         with Next.js and React, ship to Vercel, and work with Supabase and MySQL for real‑time, secure data.
                     </p>
                     <div className="grid two">
@@ -123,7 +126,9 @@ export default function Portfolio() {
                     <h2 className="section-title">Projects</h2>
                     <div className="grid three">
                         <article className="project-card">
-                            <div className="project-media" />
+                            <div className="project-media zoom-out">
+                                <img src={calubcubImage} alt="Calubcub 1st High School" loading="lazy" />
+                            </div>
                             <div className="project-body">
                                 <h3>Calubcub 1st High School IMS</h3>
                                 <p>
@@ -138,8 +143,8 @@ export default function Portfolio() {
                                     <span className="tag">Nodemailer</span>
                                 </div>
                                 <div className="project-actions">
-                                    <a className="link" href="#">Live Demo</a>
-                                    <a className="link" href="#">Source</a>
+                                    <a className="btn small secondary" target="_blank" href="https://calubcub.vercel.app/">Live Demo</a>
+                                    <a className="btn small ghost" target="_blank" href="https://github.com/glytch21/info-management-system">Code</a>
                                 </div>
                             </div>
                         </article>
@@ -159,14 +164,16 @@ export default function Portfolio() {
                                     <span className="tag">Supabase</span>
                                 </div>
                                 <div className="project-actions">
-                                    <a className="link" href="#">Live Demo</a>
-                                    <a className="link" href="#">Source</a>
+                                    <a className="btn small secondary" href="#">Live Demo</a>
+                                    <a className="btn small ghost" target="_blank" href="https://github.com/glytch21/student-portal">Code</a>
                                 </div>
                             </div>
                         </article>
 
                         <article className="project-card">
-                            <div className="project-media" />
+                            <div className="project-media zoom-out">
+                                <img src={codecrawlersImage} alt="CodeCrawlers: JS Learning Tool" loading="lazy" />
+                            </div>
                             <div className="project-body">
                                 <h3>CodeCrawlers: JS Learning Tool</h3>
                                 <p>
@@ -181,8 +188,8 @@ export default function Portfolio() {
                                     <span className="tag">Supabase</span>
                                 </div>
                                 <div className="project-actions">
-                                    <a className="link" href="#">Live Demo</a>
-                                    <a className="link" href="#">Source</a>
+                                    <a className="btn small secondary" href="#">Live Demo</a>
+                                    <a className="btn small ghost" target="_blank" href="https://github.com/glytch21/codecrawlers.github.io">Code</a>
                                 </div>
                             </div>
                         </article>
@@ -319,6 +326,22 @@ export default function Portfolio() {
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
+        /* Decorative, theme-aware background */
+        body::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background:
+            radial-gradient(1000px 600px at -10% -10%, color-mix(in oklab, var(--brand) 9%, transparent) 0%, transparent 60%),
+            radial-gradient(1000px 600px at 110% -10%, color-mix(in oklab, var(--brand-2) 9%, transparent) 0%, transparent 60%),
+            radial-gradient(900px 500px at 50% 110%, color-mix(in oklab, var(--accent) 10%, transparent) 0%, transparent 60%),
+            repeating-linear-gradient(0deg, color-mix(in oklab, var(--text) 4%, transparent) 0 1px, transparent 1px 24px),
+            repeating-linear-gradient(90deg, color-mix(in oklab, var(--text) 4%, transparent) 0 1px, transparent 1px 24px);
+          opacity: 0.18;
+          pointer-events: none;
+          z-index: 0;
+        }
+        #__next { position: relative; z-index: 1; }
 
         * { scrollbar-width: thin; scrollbar-color: rgba(100,116,139,0.5) transparent; }
         *::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -351,6 +374,9 @@ export default function Portfolio() {
         .btn.primary:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(99,102,241,0.35); }
         .btn.ghost { border-color: var(--card-stroke); background: transparent; color: var(--text); }
         .btn.ghost:hover { background: var(--card); }
+        .btn.secondary { background: color-mix(in oklab, var(--brand-2) 12%, var(--bg)); color: var(--text); border-color: color-mix(in oklab, var(--brand-2) 40%, transparent); }
+        .btn.secondary:hover { background: color-mix(in oklab, var(--brand-2) 18%, var(--bg)); }
+        .btn.small { padding: 8px 12px; font-size: 13px; }
         .cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
         .link { color: var(--brand-2); font-weight: 600; }
@@ -360,11 +386,26 @@ export default function Portfolio() {
         .pill-list li { padding: 8px 12px; border-radius: 999px; border: 1px solid var(--card-stroke); background: var(--card); }
 
         .project-card { overflow: hidden; border-radius: 16px; border: 1px solid var(--card-stroke); background: var(--card); box-shadow: var(--shadow); display: grid; grid-template-rows: 160px auto; }
-        .project-media { background: linear-gradient(135deg, var(--brand), var(--brand-2)); opacity: 0.9; }
+        .project-media { position: relative; background: linear-gradient(135deg, var(--brand), var(--brand-2)); }
+        .project-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .project-media.zoom-out img { transform: scale(1); transform-origin: center; }
+        .project-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.15)); pointer-events: none; }
         .project-body { padding: 20px; }
-        .tag-row { display: flex; gap: 8px; margin: 10px 0 12px; }
-        .tag { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(99,102,241,.12); color: var(--brand-2); border: 1px solid rgba(99,102,241,.3) }
-        .project-actions { display: flex; gap: 16px; }
+        .tag-row { display: flex; gap: 8px; margin: 10px 0 12px; flex-wrap: wrap; }
+        .tag {
+          display: inline-flex;
+          align-items: center;
+          font-size: 12px;
+          padding: 6px 10px;
+          border-radius: 999px;
+          background: rgba(99,102,241,.12);
+          color: var(--brand-2);
+          border: 1px solid rgba(99,102,241,.3);
+          flex: 0 0 auto;
+          max-width: 100%;
+          overflow-wrap: anywhere;
+        }
+        .project-actions { display: flex; gap: 16px; justify-content: flex-end; }
 
         .timeline { position: relative; margin-top: 24px; }
         .timeline:before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: var(--card-stroke); }
